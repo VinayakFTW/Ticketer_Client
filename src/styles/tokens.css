@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  /* Level 1: Primitives */
+  --void-950: #050608;
+  --void-900: #08090c;
+  --void-850: #0c0e13;
+  --void-800: #12141c;
+  --void-750: #181c26;
+  --void-700: #202432;
+  
+  --signal-ember: #ff4800;
+  --signal-ember-dim: rgba(255, 72, 0, 0.16);
+  --signal-amber: #f59e0b;
+  --signal-cyan: #00f0ff;
+  --signal-emerald: #00e599;
+
+  /* Level 2: Semantic Roles */
+  --bg: var(--void-900);
+  --bg-deep: var(--void-950);
+  --surface: var(--void-850);
+  --surface-elevated: var(--void-800);
+  --surface-high: var(--void-750);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-ember: rgba(255, 72, 0, 0.4);
+
+  --text-primary: #f4f5f7;
+  --text-secondary: rgba(244, 245, 247, 0.62);
+  --text-tertiary: rgba(244, 245, 247, 0.35);
+  --text-dim: rgba(244, 245, 247, 0.18);
+  
+  --accent: var(--signal-ember);
+  --accent-glow: rgba(255, 72, 0, 0.25);
+
+  /* Scales & Units */
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-sans: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --display-size: clamp(3.75rem, 8.5vw, 8rem);
+  --h2-size: clamp(2rem, 4.5vw, 3.75rem);
+  --h3-size: clamp(1.25rem, 2.5vw, 1.85rem);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+/* Precision Hairline Technical Grid */
+.technical-grid {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.technical-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void-950);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--signal-ember);
+}
+
+/* Rubber Stamp Effect */
+.rubber-stamp {
+  border-style: solid;
+  border-width: 2px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  display: inline-block;
+  padding: 2px 10px;
+  transform: rotate(-3deg);
+}
+
+/* Perforation Notch Cutout Styles */
+.ticket-notch-left,
+.ticket-notch-right {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: var(--bg);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.ticket-notch-left {
+  left: -8px;
+  box-shadow: inset -2px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+.ticket-notch-right {
+  right: -8px;
+  box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Mono Technical Data Typography */
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 1, "ss01" 1;
+}
