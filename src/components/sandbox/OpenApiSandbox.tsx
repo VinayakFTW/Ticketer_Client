@@ -109,7 +109,7 @@ export const OpenApiSandbox: React.FC = () => {
         {/* Section Header */}
         <div className="space-y-2 border-b border-white/10 pb-6">
           <div className="inline-flex items-center gap-2 font-mono text-[11px] text-[#ff4800] uppercase tracking-widest">
-            <span>SECTION // 02</span>
+            <span>SECTION // 01</span>
             <span>&bull;</span>
             <span>OPENAPI 3.1 PROTOCOL SANDBOX</span>
           </div>

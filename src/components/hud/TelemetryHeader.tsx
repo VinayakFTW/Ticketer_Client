@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Cpu, FileCode2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Volume2, VolumeX, Cpu } from 'lucide-react';
 import { soundFX } from '../../audio/soundFX';
 
 export const TelemetryHeader: React.FC = () => {
@@ -71,32 +72,18 @@ export const TelemetryHeader: React.FC = () => {
         <div className="flex items-center gap-4 text-xs font-mono">
           <nav className="hidden md:flex items-center gap-6 text-white/70">
             <a 
-              href="#simulator" 
-              onClick={() => soundFX.playTick()}
-              className="hover:text-[#ff4800] transition-colors flex items-center gap-1"
-            >
-              <span>01.</span> SIMULATOR
-            </a>
-            <a 
               href="#protocol-lab" 
               onClick={() => soundFX.playTick()}
               className="hover:text-[#ff4800] transition-colors flex items-center gap-1"
             >
-              <span>02.</span> OPENAPI_LAB
+              <span>01.</span> OPENAPI_LAB
             </a>
             <a 
               href="#lifecycle" 
               onClick={() => soundFX.playTick()}
               className="hover:text-[#ff4800] transition-colors flex items-center gap-1"
             >
-              <span>03.</span> LIFECYCLE
-            </a>
-            <a 
-              href="#architecture" 
-              onClick={() => soundFX.playTick()}
-              className="hover:text-[#ff4800] transition-colors flex items-center gap-1"
-            >
-              <span>04.</span> SPECS
+              <span>02.</span> LIFECYCLE
             </a>
           </nav>
 
@@ -114,15 +101,32 @@ export const TelemetryHeader: React.FC = () => {
               {audioEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
             </button>
 
-            {/* Raw OpenAPI Link */}
-            <a
-              href="#protocol-lab"
+            {/* Subscribe Link */}
+            <Link
+              to="/subscribe"
               onClick={() => soundFX.playTick()}
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white/80 rounded-xs text-[11px] transition-all"
+              className="hidden lg:flex items-center gap-1 px-2.5 py-1 text-white/70 hover:text-white hover:bg-white/5 border border-white/10 hover:border-white/20 rounded-xs text-[11px] transition-all"
             >
-              <FileCode2 className="w-3 h-3 text-[#ff4800]" />
-              <span>SCHEMA_3.1</span>
-            </a>
+              SUBSCRIBE
+            </Link>
+
+            {/* Login Link */}
+            <Link
+              to="/login"
+              onClick={() => soundFX.playTick()}
+              className="flex items-center gap-1 px-3 py-1 text-white/80 hover:text-white hover:bg-white/5 border border-white/15 hover:border-white/30 rounded-xs text-[11px] transition-all"
+            >
+              SIGN IN
+            </Link>
+
+            {/* Launch App Primary CTA */}
+            <Link
+              to="/app"
+              onClick={() => soundFX.playPunch()}
+              className="flex items-center gap-1.5 px-3 py-1 bg-[#ff4800] hover:bg-[#e03f00] text-white font-bold rounded-xs text-[11px] tracking-wider transition-all shadow-[0_0_12px_rgba(255,72,0,0.3)] active:scale-95"
+            >
+              <span>LAUNCH APP</span>
+            </Link>
           </div>
         </div>
 

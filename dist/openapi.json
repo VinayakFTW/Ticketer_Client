@@ -1,16 +1,23 @@
 {
   "openapi": "3.1.0",
-  "info": { "title": "Ticketer Server", "version": "0.1.0" },
+  "info": {
+    "title": "Ticketer Server",
+    "version": "0.1.0"
+  },
   "paths": {
     "/api/v1/auth/signin": {
       "post": {
-        "tags": ["Authentication API"],
+        "tags": [
+          "Authentication API"
+        ],
         "summary": "Signin",
         "operationId": "signin_api_v1_auth_signin_post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
             }
           },
           "required": true
@@ -18,13 +25,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -33,13 +46,17 @@
     },
     "/api/v1/auth/signup": {
       "post": {
-        "tags": ["Authentication API"],
+        "tags": [
+          "Authentication API"
+        ],
         "summary": "Sign Up",
         "operationId": "sign_up_api_v1_auth_signup_post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateUserRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
             }
           },
           "required": true
@@ -47,13 +64,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -62,13 +85,17 @@
     },
     "/api/v1/auth/signout": {
       "post": {
-        "tags": ["Authentication API"],
+        "tags": [
+          "Authentication API"
+        ],
         "summary": "Signout",
         "operationId": "signout_api_v1_auth_signout_post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/SignOutRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/SignOutRequest"
+              }
             }
           },
           "required": true
@@ -76,13 +103,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -91,13 +124,17 @@
     },
     "/api/v1/auth/refresh": {
       "post": {
-        "tags": ["Authentication API"],
+        "tags": [
+          "Authentication API"
+        ],
         "summary": "Refresh Access Token",
         "operationId": "refresh_access_token_api_v1_auth_refresh_post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RefreshTokenRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
             }
           },
           "required": true
@@ -105,13 +142,19 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -120,35 +163,57 @@
     },
     "/api/v1/users/all": {
       "get": {
-        "tags": ["Users API"],
+        "tags": [
+          "Users API"
+        ],
         "summary": "Get All Users",
         "operationId": "get_all_users_api_v1_users_all_get",
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/admin/tickets/all": {
       "get": {
-        "tags": ["Tickets API"],
+        "tags": [
+          "Tickets API"
+        ],
         "summary": "Get All Tickets",
         "operationId": "get_all_tickets_api_v1_admin_tickets_all_get",
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/admin/tickets/create": {
       "post": {
-        "tags": ["Tickets API"],
+        "tags": [
+          "Tickets API"
+        ],
         "summary": "Create Ticket",
         "operationId": "create_ticket_api_v1_admin_tickets_create_post",
         "requestBody": {
@@ -164,52 +229,79 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/staff/tickets/update/{ticket_id}": {
       "put": {
-        "tags": ["Tickets API"],
+        "tags": [
+          "Tickets API"
+        ],
         "summary": "Update Ticket",
         "operationId": "update_ticket_api_v1_staff_tickets_update__ticket_id__put",
-        "security": [{ "HTTPBearer": [] }],
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "ticket_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer", "title": "Ticket Id" }
+            "schema": {
+              "type": "integer",
+              "title": "Ticket Id"
+            }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateTicketRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTicketRequest"
+              }
             }
           }
         },
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -218,27 +310,41 @@
     },
     "/api/v1/client/users/details": {
       "get": {
-        "tags": ["Users API"],
+        "tags": [
+          "Users API"
+        ],
         "summary": "Get User Details",
         "operationId": "get_user_details_api_v1_client_users_details_get",
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/client/users/update": {
       "put": {
-        "tags": ["Users API"],
+        "tags": [
+          "Users API"
+        ],
         "summary": "Update User Details",
         "operationId": "update_user_details_api_v1_client_users_update_put",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateUserRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
             }
           },
           "required": true
@@ -246,43 +352,67 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/client/tickets/all": {
       "get": {
-        "tags": ["Tickets API"],
+        "tags": [
+          "Tickets API"
+        ],
         "summary": "Get All Tickets By User",
         "operationId": "get_all_tickets_by_user_api_v1_client_tickets_all_get",
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/client/tickets/create": {
       "post": {
-        "tags": ["Tickets API"],
+        "tags": [
+          "Tickets API"
+        ],
         "summary": "Create Ticket",
         "operationId": "create_ticket_api_v1_client_tickets_create_post",
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateTicketRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/CreateTicketRequest"
+              }
             }
           },
           "required": true
@@ -290,57 +420,249 @@
         "responses": {
           "200": {
             "description": "Successful Response",
-            "content": { "application/json": { "schema": {} } }
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
-        "security": [{ "HTTPBearer": [] }]
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/verify": {
+      "post": {
+        "tags": [
+          "Authentication API"
+        ],
+        "summary": "Verify Signup OTP",
+        "operationId": "verify_signup_api_v1_auth_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "": "#/components/schemas/VerifyOtpRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Verification"
+          },
+          "401": {
+            "description": "Invalid or Expired OTP"
+          },
+          "422": {
+            "description": "Validation Error"
+          }
+        }
+      }
+    },
+    "/api/v1/client/users/subscription": {
+      "get": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Get Current User Subscription",
+        "operationId": "get_client_subscription_api_v1_client_users_subscription_get",
+        "responses": {
+          "200": {
+            "description": "Subscription Status Retrieved"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/client/users/subscription/renew": {
+      "put": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Renew Current User Subscription",
+        "operationId": "renew_client_subscription_api_v1_client_users_subscription_renew_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "": "#/components/schemas/UpdateSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription Renewed"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users/subscription/{user_id}": {
+      "get": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Get User Subscription By ID (Admin)",
+        "operationId": "get_admin_user_subscription_api_v1_admin_users_subscription_user_id_get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User Subscription Retrieved"
+          },
+          "403": {
+            "description": "Forbidden (Admin Required)"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users/subscription/renew/{user_id}": {
+      "put": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Renew User Subscription By ID (Admin)",
+        "operationId": "renew_admin_user_subscription_api_v1_admin_users_subscription_renew_user_id_put",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "": "#/components/schemas/UpdateSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription Updated"
+          },
+          "403": {
+            "description": "Forbidden (Admin Required)"
+          }
+        }
       }
     }
   },
   "components": {
     "schemas": {
       "CreateTicketRequest": {
-        "properties": { "text": { "type": "string", "title": "Text" } },
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
         "type": "object",
-        "required": ["text"],
+        "required": [
+          "text"
+        ],
         "title": "CreateTicketRequest"
       },
       "CreateTicketRequestAdmin": {
         "properties": {
-          "email": { "type": "string", "title": "Email" },
-          "text": { "type": "string", "title": "Text" }
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
         },
         "type": "object",
-        "required": ["email", "text"],
+        "required": [
+          "email",
+          "text"
+        ],
         "title": "CreateTicketRequestAdmin"
       },
       "CreateUserRequest": {
         "properties": {
-          "name": { "type": "string", "title": "Name" },
-          "email": { "type": "string", "title": "Email" },
-          "password": { "type": "string", "title": "Password" },
-          "institute": { "type": "string", "title": "Institute" },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          },
+          "institute": {
+            "type": "string",
+            "title": "Institute"
+          },
           "role": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Role"
           }
         },
         "type": "object",
-        "required": ["name", "email", "password", "institute"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "institute"
+        ],
         "title": "CreateUserRequest"
       },
       "HTTPValidationError": {
         "properties": {
           "detail": {
-            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
             "type": "array",
             "title": "Detail"
           }
@@ -350,41 +672,81 @@
       },
       "LoginRequest": {
         "properties": {
-          "email": { "type": "string", "title": "Email" },
-          "password": { "type": "string", "title": "Password" }
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
         },
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "title": "LoginRequest"
       },
       "RefreshTokenRequest": {
         "properties": {
-          "refresh_token": { "type": "string", "title": "Refresh Token" }
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
         },
         "type": "object",
-        "required": ["refresh_token"],
+        "required": [
+          "refresh_token"
+        ],
         "title": "RefreshTokenRequest"
       },
       "SignOutRequest": {
         "properties": {
-          "refresh_token": { "type": "string", "title": "Refresh Token" }
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
         },
         "type": "object",
-        "required": ["refresh_token"],
+        "required": [
+          "refresh_token"
+        ],
         "title": "SignOutRequest"
       },
       "UpdateTicketRequest": {
         "properties": {
           "status": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Status"
           },
           "assigned_email": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Assigned Email"
           },
           "last_bump_time": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Last Bump Time"
           }
         },
@@ -394,23 +756,58 @@
       "UpdateUserRequest": {
         "properties": {
           "name": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Name"
           },
           "email": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Email"
           },
           "password": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Password"
           },
           "institute": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Institute"
           },
           "role": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Role"
           }
         },
@@ -420,20 +817,84 @@
       "ValidationError": {
         "properties": {
           "loc": {
-            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
             "type": "array",
             "title": "Location"
           },
-          "msg": { "type": "string", "title": "Message" },
-          "type": { "type": "string", "title": "Error Type" },
-          "input": { "title": "Input" },
-          "ctx": { "type": "object", "title": "Context" }
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
         },
         "type": "object",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "title": "ValidationError"
+      },
+      "VerifyOtpRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "otp"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email",
+            "description": "Student or staff institutional email"
+          },
+          "otp": {
+            "type": "string",
+            "title": "OTP",
+            "description": "6-digit verification code"
+          }
+        },
+        "title": "VerifyOtpRequest"
+      },
+      "UpdateSubscriptionRequest": {
+        "type": "object",
+        "required": [
+          "active"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "description": "Subscription active status flag"
+          }
+        },
+        "title": "UpdateSubscriptionRequest"
       }
     },
-    "securitySchemes": { "HTTPBearer": { "type": "http", "scheme": "bearer" } }
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
   }
 }

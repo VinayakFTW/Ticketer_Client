@@ -93,7 +93,7 @@ export const LifecycleConveyor: React.FC = () => {
         {/* Section Header */}
         <div className="space-y-2 border-b border-white/10 pb-6">
           <div className="inline-flex items-center gap-2 font-mono text-[11px] text-[#ff4800] uppercase tracking-widest">
-            <span>SECTION // 03</span>
+            <span>SECTION // 02</span>
             <span>&bull;</span>
             <span>KINETIC LIFECYCLE REEL</span>
           </div>

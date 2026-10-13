@@ -1,39 +1,40 @@
-import React from 'react';
-import { HairlineGrid } from './components/common/HairlineGrid';
-import { TelemetryHeader } from './components/hud/TelemetryHeader';
-import { HeroSection } from './components/hero/HeroSection';
-import { RoleSimulator } from './components/simulator/RoleSimulator';
-import { OpenApiSandbox } from './components/sandbox/OpenApiSandbox';
-import { LifecycleConveyor } from './components/lifecycle/LifecycleConveyor';
-import { ArchitectureBento } from './components/specs/ArchitectureBento';
-import { TechnicalFooter } from './components/footer/TechnicalFooter';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const SignupPage = lazy(() => import('./pages/SignupPage'));
+const VerifyPage = lazy(() => import('./pages/VerifyPage'));
+const SubscribePage = lazy(() => import('./pages/SubscribePage'));
+const AppShell = lazy(() => import('./pages/app/AppShell'));
+
+const LoadingFallback: React.FC = () => (
+  <div className="min-h-screen bg-[#08090c] text-white flex items-center justify-center font-mono text-xs">
+    <div className="flex items-center gap-3 p-4 bg-[#0e1017] border border-white/10 rounded-xs">
+      <div className="w-2.5 h-2.5 rounded-full bg-[#ff4800] animate-ping" />
+      <span className="tracking-widest uppercase text-white/80">INITIALIZING DISPATCH CONSOLE...</span>
+    </div>
+  </div>
+);
 
 export const App: React.FC = () => {
   return (
-    <HairlineGrid className="min-h-screen bg-[#08090c] text-[#f4f5f7] selection:bg-[#ff4800] selection:text-white">
-      {/* Fixed Telemetry HUD Header */}
-      <TelemetryHeader />
-
-      <main className="relative z-10 space-y-0">
-        {/* Hero Section with Asymmetric Scale Contrast & 3D Shuffler */}
-        <HeroSection />
-
-        {/* 3-Role Interactive Orchestrator (Client / Staff / Admin) */}
-        <RoleSimulator />
-
-        {/* OpenAPI 3.1 Live Protocol Sandbox & Request Dispatcher */}
-        <OpenApiSandbox />
-
-        {/* Kinetic 5-Stage Lifecycle Conveyor */}
-        <LifecycleConveyor />
-
-        {/* Swiss Pixel-Gap Architectural Specifications Bento */}
-        <ArchitectureBento />
-      </main>
-
-      {/* Production Technical Footer */}
-      <TechnicalFooter />
-    </HairlineGrid>
+    <AuthProvider>
+      <BrowserRouter>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/verify" element={<VerifyPage />} />
+            <Route path="/subscribe" element={<SubscribePage />} />
+            <Route path="/app" element={<AppShell />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

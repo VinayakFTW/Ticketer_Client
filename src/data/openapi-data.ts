@@ -18,7 +18,7 @@ export const OPENAPI_SPEC_INFO = {
   title: "Ticketer Server",
   version: "0.1.0",
   openapi: "3.1.0",
-  totalEndpoints: 12,
+  totalEndpoints: 17,
   tags: ["Authentication", "Client", "Staff", "Admin"] as const
 };
 
@@ -388,5 +388,143 @@ export const ENDPOINTS: EndpointDefinition[] = [
       detail: "Not authenticated"
     },
     description: "Inspects authenticated client tenant profile and SLA operational score."
+  },
+
+  // 11. Auth Verify OTP
+  {
+    id: "auth-verify",
+    path: "/api/v1/auth/verify",
+    method: "POST",
+    tag: "Authentication",
+    summary: "Verify Signup OTP",
+    operationId: "verify_signup_api_v1_auth_verify_post",
+    requiresAuth: false,
+    requestSchemaName: "VerifyOtpRequest",
+    requestSchema: {
+      type: "object",
+      required: ["email", "otp"],
+      properties: {
+        email: { type: "string", title: "Email", description: "Registered institutional email" },
+        otp: { type: "string", title: "OTP", description: "6-digit verification code" }
+      }
+    },
+    defaultPayload: {
+      email: "aarav.sharma@sitpune.edu.in",
+      otp: "849201"
+    },
+    successResponseSample: {
+      data: null,
+      message: "Email verified successfully. You can now log in."
+    },
+    errorResponseSample: {
+      detail: "Invalid or expired verification OTP"
+    },
+    description: "Verifies student or staff email using the 6-digit OTP code dispatched on signup."
+  },
+
+  // 12. Client Subscription Status
+  {
+    id: "client-subscription-status",
+    path: "/api/v1/client/users/subscription",
+    method: "GET",
+    tag: "Client",
+    summary: "Get Subscription Status",
+    operationId: "get_user_subscription_api_v1_client_users_subscription_get",
+    requiresAuth: true,
+    successResponseSample: {
+      data: {
+        active: true
+      },
+      message: "Subscription active"
+    },
+    errorResponseSample: {
+      detail: "Not authenticated"
+    },
+    description: "Queries the active institutional tier subscription and fast-track SLA status for the current user."
+  },
+
+  // 13. Client Renew Subscription
+  {
+    id: "client-subscription-renew",
+    path: "/api/v1/client/users/subscription/renew",
+    method: "PUT",
+    tag: "Client",
+    summary: "Renew Subscription",
+    operationId: "renew_user_subscription_api_v1_client_users_subscription_renew_put",
+    requiresAuth: true,
+    requestSchemaName: "UpdateSubscriptionRequest",
+    requestSchema: {
+      type: "object",
+      required: ["active"],
+      properties: {
+        active: { type: "boolean", title: "Active", description: "Subscription status" }
+      }
+    },
+    defaultPayload: {
+      active: true
+    },
+    successResponseSample: {
+      data: {
+        user_id: 101,
+        active: true
+      },
+      message: "Subscription renewed"
+    },
+    errorResponseSample: {
+      detail: "Error updating subscription"
+    },
+    description: "Renews or toggles active state of the user's institutional SLA subscription."
+  },
+
+  // 14. Admin User Subscription Get
+  {
+    id: "admin-subscription-get",
+    path: "/api/v1/admin/users/subscription/{user_id}",
+    method: "GET",
+    tag: "Admin",
+    summary: "Get User Subscription (Admin)",
+    operationId: "get_user_subscription_admin_api_v1_admin_users_subscription_get",
+    requiresAuth: true,
+    successResponseSample: {
+      data: {
+        active: true
+      }
+    },
+    errorResponseSample: {
+      detail: "Forbidden"
+    },
+    description: "Admin inspection of subscription records for any tenant user across the campus."
+  },
+
+  // 15. Admin User Subscription Renew
+  {
+    id: "admin-subscription-renew",
+    path: "/api/v1/admin/users/subscription/renew/{user_id}",
+    method: "PUT",
+    tag: "Admin",
+    summary: "Renew User Subscription (Admin)",
+    operationId: "renew_user_subscription_admin_api_v1_admin_users_subscription_renew_put",
+    requiresAuth: true,
+    requestSchemaName: "UpdateSubscriptionRequest",
+    requestSchema: {
+      type: "object",
+      required: ["active"],
+      properties: {
+        active: { type: "boolean", title: "Active", description: "Subscription active status flag" }
+      }
+    },
+    defaultPayload: {
+      active: true
+    },
+    successResponseSample: {
+      data: {
+        user_id: 101,
+        active: true
+      }
+    },
+    errorResponseSample: {
+      detail: "Forbidden"
+    },
+    description: "Administrative override to renew or terminate tenant user subscription entitlements."
   }
 ];
