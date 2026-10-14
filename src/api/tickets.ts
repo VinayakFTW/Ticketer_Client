@@ -22,6 +22,12 @@ export const createClientTicketApi = async (text: string): Promise<ApiResponse<C
 };
 
 // Staff Ticket APIs
+export const getStaffTicketsApi = async (): Promise<ApiResponse<{ tickets: Ticket[] }>> => {
+  return await apiRequest<{ tickets: Ticket[] }>('/api/v1/staff/tickets/all', {
+    method: 'GET',
+  });
+};
+
 export const updateStaffTicketApi = async (
   ticketId: number,
   params: UpdateTicketParams

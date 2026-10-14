@@ -19,6 +19,7 @@ export type TicketPriority = 'LOW' | 'MEDIUM' | 'URGENT' | 'CRITICAL';
 export interface Ticket {
   ticket_id: number;
   user_id?: number;
+  user_email?: string | null;
   text: string;
   summary?: string | null;
   department?: string | null;

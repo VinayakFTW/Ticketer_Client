@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { soundFX } from '../../audio/soundFX';
 import { Ticket, TicketStatus } from '../../types/api';
-import { updateStaffTicketApi, getAdminTicketsApi, getClientTicketsApi } from '../../api/tickets';
+import { updateStaffTicketApi, getStaffTicketsApi } from '../../api/tickets';
 import { 
   Users, 
   AlertTriangle, 
@@ -48,20 +48,8 @@ export const StaffView: React.FC = () => {
     setLoading(true);
     setFetchError(null);
     try {
-      // Try admin ticket registry first (supervisor queue), fallback to client tickets
-      let ticketList: Ticket[] = [];
-      try {
-        const res = await getAdminTicketsApi();
-        if (res.data?.tickets) {
-          ticketList = res.data.tickets;
-        }
-      } catch {
-        const resClient = await getClientTicketsApi();
-        if (resClient.data?.tickets) {
-          ticketList = resClient.data.tickets;
-        }
-      }
-
+      const res = await getStaffTicketsApi();
+      const ticketList: Ticket[] = res.data?.tickets || [];
       setQueue(ticketList);
       if (ticketList.length > 0 && !selectedTicketId) {
         setSelectedTicketId(ticketList[0].ticket_id);
@@ -69,7 +57,7 @@ export const StaffView: React.FC = () => {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : '';
       if (!msg.toLowerCase().includes('not found') && !msg.toLowerCase().includes('404')) {
-        setFetchError('Unable to fetch queue from server');
+        setFetchError(msg || 'Unable to fetch queue from server');
       }
       setQueue([]);
     } finally {
@@ -134,18 +122,28 @@ export const StaffView: React.FC = () => {
     }
   };
 
+  const DEPARTMENT_LABELS: Record<string, string> = {
+    ALL: 'ALL',
+    it_support: 'IT Support',
+    facilities: 'Facilities',
+    academics_admin: 'Academics',
+    student_services: 'Student Services',
+    safety_committee: 'Safety',
+  };
+
+  const departments = ['ALL', 'it_support', 'facilities', 'academics_admin', 'student_services', 'safety_committee'];
+
   // Filtered queue
   const filteredQueue = queue.filter(t => {
-    const matchDept = filterDepartment === 'ALL' || t.department === filterDepartment;
+    const matchDept = filterDepartment === 'ALL' || t.department?.toLowerCase() === filterDepartment.toLowerCase();
     const matchStatus = filterStatus === 'ALL' || t.status.toLowerCase() === filterStatus.toLowerCase();
     const matchQuery = !searchQuery || 
       t.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (t.summary && t.summary.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (t.user_email && t.user_email.toLowerCase().includes(searchQuery.toLowerCase())) ||
       String(t.ticket_id).includes(searchQuery);
     return matchDept && matchStatus && matchQuery;
   });
-
-  const departments = ['ALL', 'Facilities & Maintenance', 'IT Infrastructure', 'Academic & Student Affairs'];
 
   return (
     <div className="space-y-6 font-mono">
@@ -233,7 +231,7 @@ export const StaffView: React.FC = () => {
                     : 'bg-white/5 text-white/50 hover:text-white'
                 }`}
               >
-                {d === 'ALL' ? 'ALL' : d.split(' ')[0]}
+                {DEPARTMENT_LABELS[d] || d}
               </button>
             ))}
           </div>
@@ -295,7 +293,8 @@ export const StaffView: React.FC = () => {
                     </div>
 
                     <div className="pt-2 flex items-center justify-between text-[10px] text-white/40">
-                      <span>{t.department || 'General'}</span>
+                      <span>{t.department ? (DEPARTMENT_LABELS[t.department] || t.department) : 'General'}</span>
+                      {t.user_email && <span className="text-white/30 truncate max-w-[140px]">{t.user_email}</span>}
                       {t.bump_count > 0 && (
                         <span className="text-amber-400 font-bold">BUMPED {t.bump_count}x</span>
                       )}
@@ -331,8 +330,11 @@ export const StaffView: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <div className="text-xs text-white/50 mt-0.5">
-                    Assigned Department: <span className="text-white">{activeTicket.department || 'Triage Assigned'}</span>
+                  <div className="text-xs text-white/50 mt-0.5 flex flex-wrap items-center gap-x-4">
+                    <span>Assigned Department: <span className="text-white">{DEPARTMENT_LABELS[activeTicket.department || ''] || activeTicket.department || 'Triage Assigned'}</span></span>
+                    {activeTicket.user_email && (
+                      <span>Filed by: <span className="text-cyan-400 font-mono">{activeTicket.user_email}</span></span>
+                    )}
                   </div>
                 </div>
 
